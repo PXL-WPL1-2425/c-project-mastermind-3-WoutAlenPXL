@@ -1,0 +1,82 @@
+﻿<Window x:Class="Mastermind.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Mastermind"
+        Height="700" Width="800"
+        Background="LightGray"
+        Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Menu -->
+        <Menu Grid.Row="0">
+            <MenuItem Header="Bestand">
+                <MenuItem Header="Nieuw spel" Click="MenuNewGame_Click"/>
+                <MenuItem Header="Highscores" Click="MenuHighscores_Click"/>
+                <MenuItem Header="Afsluiten" Click="MenuExit_Click"/>
+            </MenuItem>
+            <MenuItem Header="Instellingen">
+                <MenuItem Header="Aantal pogingen" Click="MenuSetAttempts_Click"/>
+                <MenuItem Header="Aantal kleuren" Click="MenuSetColorOptions_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Titel -->
+        <TextBlock Grid.Row="1" Text="Mastermind" FontSize="28" FontWeight="Bold" 
+                   HorizontalAlignment="Center" Margin="10" Foreground="DarkBlue" />
+
+        <!-- Debug TextBox -->
+        <TextBox x:Name="DebugTextBox" Grid.Row="1" Visibility="Collapsed" 
+                 HorizontalAlignment="Center" Margin="10" IsReadOnly="True" Width="400" 
+                 Background="LightYellow" Foreground="Black" />
+
+        <!-- Status informatie -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+            <Label x:Name="PlayerLabel" Content="Actieve speler: " FontSize="16" Margin="20" />
+            <Label x:Name="AttemptsLabel" Content="Pogingen: 0 / 10" FontSize="16" Margin="20" />
+            <Label x:Name="TimerLabel" Content="Tijd: 10s" FontSize="16" Margin="20" />
+        </StackPanel>
+
+        <!-- Historiek -->
+        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="1" Margin="10">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="HistoryPanel" Margin="10"></StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Invoer en score -->
+        <StackPanel Grid.Row="4" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
+            <!-- Player Scores -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <ItemsControl x:Name="PlayerScoresPanel">
+                    <!-- Dynamically add labels for each player here -->
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- Color Input -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <ComboBox x:Name="ColorBox1" Width="80" Margin="5" />
+                <ComboBox x:Name="ColorBox2" Width="80" Margin="5" />
+                <ComboBox x:Name="ColorBox3" Width="80" Margin="5" />
+                <ComboBox x:Name="ColorBox4" Width="80" Margin="5" />
+            </StackPanel>
+
+            <!-- Controls -->
+            <Button Content="Controleer Code" Click="CheckCode_Click" 
+                    Width="150" Height="40" Background="SteelBlue" Foreground="White" 
+                    FontWeight="Bold" Margin="10"/>
+            <Button Content="Koop een hint" Click="BuyHint_Click" 
+                    Width="150" Height="40" Background="Orange" Foreground="White" 
+                    FontWeight="Bold" Margin="10"/>
+
+            <!-- Score -->
+            <Label x:Name="ScoreLabel" Content="Score: 100" FontSize="16" 
+                   HorizontalAlignment="Center" Margin="10" />
+        </StackPanel>
+    </Grid>
+</Window>
